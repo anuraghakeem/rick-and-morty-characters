@@ -5,9 +5,8 @@ export const CardStyle = styled.article`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: auto;
-  min-width: 400px;
-  min-height: 400px;
+  width: 155px;
+  height: 650px;
   background-color: #fff;
   border-radius: 10px;
   margin: 10px;
@@ -16,10 +15,10 @@ export const CardStyle = styled.article`
   box-sizing: border-box;
 
   figure {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
-    border-radius: 100%;
+    border-radius: 10%;
     box-shadow: 0 10px 20px #ccc;
     margin: 0px;
 

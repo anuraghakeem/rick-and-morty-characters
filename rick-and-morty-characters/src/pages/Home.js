@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import Character from '../components/Character';
 import SearchBar from '../components/SearchBar';
+import FilterContainer from '../components/FilterContainer';
+import SortById from '../components/SortById';
 
 const Container = styled.div`
   max-width: 1280px;
@@ -12,7 +14,9 @@ const Container = styled.div`
 function Home() {
     return (
         <Container className="root">
+          <FilterContainer />
           <SearchBar />
+          <SortById />
           <Character />
         </Container>
     );

@@ -23,7 +23,7 @@ function Character() {
       {state.characters ? (
         <Card characters={state.characters.results} />
       ) : (
-        'cargando...'
+        'loading...'
       )}
     </CharacterStyle>
   );

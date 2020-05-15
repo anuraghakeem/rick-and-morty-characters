@@ -12,8 +12,12 @@ function Card({ characters = [] }) {
       </figure>
       <CardContent>
         <Label title="name" content={character.name} />
+        <Label title="id" content={character.id} />
         <Label title="status" content={character.status} />
         <Label title="species" content={character.species} />
+        <Label title="gender" content={character.gender} />
+        <Label title="origin" content={character.origin.name} />
+        <Label title="last location" content={character.location.name} />
       </CardContent>
     </CardStyle>
   ));
