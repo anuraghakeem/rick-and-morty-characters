@@ -10,7 +10,8 @@ import { Header, FlexContainer } from './FilterContainerStyle';
 
 
 export default function FilterContainer() {
-  const filterList = ['Species','Gender','Origin']
+  // const filterList = ['Location','Gender']
+  const filterList = ['Location','Gender','Episode']
     return (
       <div>
         <ExpansionPanel>
