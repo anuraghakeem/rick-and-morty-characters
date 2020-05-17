@@ -5,7 +5,7 @@ import Label from './../Label';
 import { CardStyle, CardContent } from './CardStyle';
 
 function Card({ characters = [] }) {
-  return characters.map((character) => (
+  return characters && characters.length>0 && characters.map((character) => (
     <CardStyle key={character.id}>
       <figure>
         <img src={character.image} alt="character" />

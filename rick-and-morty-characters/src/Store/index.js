@@ -2,8 +2,11 @@ import React, { createContext, useReducer } from 'react';
 import Reducer from './../reducer';
 
 const initialStore = {
-  characters: null,
+  characters: [],
   searchValue: '',
+  appliedFilters:[],
+  filteredCharacters:[],
+  searchResultCharacters:[]
 };
 
 const Context = createContext(initialStore);

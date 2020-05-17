@@ -10,20 +10,30 @@ function Character() {
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
-    getCharacters(state.searchValue).then((res) =>
+    getCharacters().then((res) =>
       dispatch({
         type: 'SET_CHARACTERS',
         payload: res,
       }),
     );
-  }, [dispatch, state.searchValue]);
+  }, []);
 
   return (
     <CharacterStyle>
-      {state.characters ? (
-        <Card characters={state.characters.results} />
-      ) : (
-        'loading...'
+      {state.filteredCharacters && state.filteredCharacters.length>0 ? (
+        <Card characters={state.filteredCharacters} />
+      )
+      : state.filteredCharacters && state.filteredCharacters.length==0 && state.searchValue.length>0 && state.appliedFilters.length>0 ?(
+        'No matches :('
+      )
+      // : state.searchResultCharacters && state.searchResultCharacters.length>0?(
+      //   <Card characters={state.searchResultCharacters} />
+      // ) 
+      : state.characters && state.characters.length>0?(
+        <Card characters={state.characters} />
+      ) 
+      :(
+        'Loading matched characters...'
       )}
     </CharacterStyle>
   );

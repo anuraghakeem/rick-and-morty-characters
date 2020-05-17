@@ -1,21 +1,36 @@
 import React, { useContext, useState } from 'react';
 import { Context } from './../../Store';
 import { SearchBarStyle } from './searchBarStyle';
+import { getCharacters, getCharactersBySearch } from './../../services/rickandmortyService';
 
 function SearchBar() {
   const [state, dispatch] = useContext(Context);
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState('');
 
   const handleSubmit = () => {
-    dispatch({
-      type: 'SET_SEARCH_VALUE',
-      payload: searchValue,
-    });
+    console.log("search value before submit button: ",searchValue)
+    getCharactersBySearch(searchValue).then((res) =>
+      dispatch({
+        type: 'SET_SEARCH_VALUE',
+        payload: {res:res,searchValue:searchValue},
+      }),
+    );
+    // dispatch({
+    //   type: 'SET_SEARCH_VALUE',
+    //   payload: searchValue,
+    // });
   };
 
   const resetSearchValue = () => {
-    dispatch({ type: 'REMOVE_SEARCH_VALUE' });
-    setSearchValue('');
+    // getCharacters().then((res) =>
+    //   dispatch({
+    //     type: 'REMOVE_SEARCH_VALUE',
+    //     payload: res,
+    //   }),
+    // );
+    // // dispatch({ type: 'REMOVE_SEARCH_VALUE' });
+    // setSearchValue('');
+    window.location.reload();
   };
 
   return (
@@ -29,7 +44,7 @@ function SearchBar() {
       </button>
       {state.searchValue && (
         <button className="danger" type="button" onClick={resetSearchValue}>
-          Reset Search
+          Reset All
         </button>
       )}
     </SearchBarStyle>
