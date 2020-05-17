@@ -92,6 +92,43 @@ const Reducer = (state, action) => {
       newState_REMOVE_SEARCH_VALUE.characters=[...action.payload.results]
       console.log("New state after reset from reducers:",newState_REMOVE_SEARCH_VALUE)
       return newState_REMOVE_SEARCH_VALUE
+    case 'SORT_ASC':
+      function sortAsc(arr, field) {
+        return arr.sort(function (a, b) {
+            if (a[field] > b[field]) {
+                return 1;
+            }
+            if (b[field]> a[field]) {
+                return -1;
+            }
+            return 0;
+        })
+      }
+      let newState_SORT_ASC={...state}
+      // newState_REMOVE_SEARCH_VALUE.searchValue=''
+      newState_SORT_ASC.searchResultCharacters= sortAsc(newState_SORT_ASC.searchResultCharacters, `id`)
+      newState_SORT_ASC.filteredCharacters= sortAsc(newState_SORT_ASC.filteredCharacters, `id`)
+      newState_SORT_ASC.characters= sortAsc(newState_SORT_ASC.characters, `id`)
+      return newState_SORT_ASC
+    case 'SORT_DESC':
+      function sortDesc(arr, field) {
+        return arr.sort(function (a, b) {
+            if (a[field] > b[field]) {
+                return -1;
+            }
+            if (b[field]> a[field]) {
+                return 1;
+            }
+            return 0;
+        })
+     }
+      let newState_SORT_DESC={...state}
+      // newState_REMOVE_SEARCH_VALUE.searchValue=''
+      newState_SORT_DESC.searchResultCharacters= sortDesc(newState_SORT_DESC.searchResultCharacters, `id`)
+      newState_SORT_DESC.filteredCharacters= sortDesc(newState_SORT_DESC.filteredCharacters, `id`)
+      newState_SORT_DESC.characters= sortDesc(newState_SORT_DESC.characters, `id`)
+      console.log("desc order for characters in state: ", newState_SORT_DESC.characters)
+      return newState_SORT_DESC
     default:
       return state;
   }
