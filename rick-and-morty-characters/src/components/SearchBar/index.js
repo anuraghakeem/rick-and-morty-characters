@@ -30,11 +30,11 @@ function SearchBar() {
       <button className="primary" type="button" onClick={handleSubmit}>
         Search
       </button>
-      {state.searchValue && (
+      {/* {state.searchValue && (
         <button className="danger" type="button" onClick={resetSearchValue}>
           Reset All
         </button>
-      )}
+      )} */}
     </SearchBarStyle>
   );
 }

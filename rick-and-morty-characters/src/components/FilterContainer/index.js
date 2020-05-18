@@ -6,14 +6,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Filter from '../Filter'
 
-import { Header, FlexContainer } from './FilterContainerStyle';
+import { Header, FlexContainer, FilterContainer_Div} from './FilterContainerStyle';
 
 
 export default function FilterContainer() {
-  const filterList = ['Location','Gender','Episode']
+  const filterList = ['Last Location','Gender','Episode']
     return (
-      <div>
-        <ExpansionPanel>
+      <FilterContainer_Div className="filter-conatiner-div">
+        <ExpansionPanel className={"filter-epanded"}>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -27,6 +27,6 @@ export default function FilterContainer() {
             </FlexContainer>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-    </div>
+    </FilterContainer_Div>
     );
   }

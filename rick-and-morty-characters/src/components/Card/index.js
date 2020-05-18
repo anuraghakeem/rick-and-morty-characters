@@ -6,7 +6,7 @@ import { CardStyle, CardContent } from './CardStyle';
 
 function Card({ characters = [] }) {
   return characters && characters.length>0 && characters.map((character) => (
-    <CardStyle key={character.id}>
+    <CardStyle key={character.id} className='card'>
       <figure>
         <img src={character.image} alt="character" />
       </figure>

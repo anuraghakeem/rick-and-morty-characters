@@ -21,7 +21,7 @@ function Filter({ name }) {
         {name:"unknown", property:false}
       ]);
     }
-    else if(name=='Location'){
+    else if(name=='Last Location'){
       getLocations()
       .then((res) =>{
         const newList= res.map(location=>{return {name:location,property:false}} )
@@ -45,23 +45,35 @@ function Filter({ name }) {
         setItems([ ...dummyArr]);
       }
     }
-    if(event.target.checked== true){
+    console.log("event.target",event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.MuiFormLabel-root').querySelector('h3').innerHTML )
+    let categoryName=""+ event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.MuiFormLabel-root').querySelector('h3').innerHTML
+    console.log("categoryName after assigning value from onclick",categoryName)
+    let categoryNumber;
+    if(categoryName=='Last Location')
+      categoryNumber=0
+    else if(categoryName=='Gender')
+      categoryNumber=1
+    else if(categoryName=='Episode')
+      categoryNumber=2
+    console.log("event.currentTarget",event.currentTarget.parentElement.parentElement.parentElement)
+    console.log("categoryNumber after checking which category:",categoryNumber)
+    if(event.target.checked== true && categoryNumber in [0,1,2]){
       if(event.target.name.includes('https')){
         dispatch({ 
           type: 'SET_FILTER_BY_VALUE_GENDER',
-          payload:{value:event.target.name,name:event.target.name,episodeurl:event.target.name}    
+          payload:{value:event.target.name,name:event.target.name,episodeurl:event.target.name,categoryNumber:categoryNumber}    
         })
       }
       else{
         dispatch({ 
           type: 'SET_FILTER_BY_VALUE_GENDER',
-          payload:{value:event.target.name,name:event.target.name}    
+          payload:{value:event.target.name,name:event.target.name,categoryNumber:categoryNumber}    
         })
       }
     }
       else {dispatch({ 
         type: 'SET_FILTER_BY_VALUE_GENDER',
-        payload:{value:"",name:event.target.name}    
+        payload:{value:"",name:event.target.name,categoryNumber:categoryNumber}    
       })}
     }
 

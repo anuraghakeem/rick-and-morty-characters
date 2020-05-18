@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LabelStyle = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 
   .title {
     display: block;

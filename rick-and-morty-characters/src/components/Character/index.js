@@ -23,14 +23,15 @@ function Character() {
       {state.filteredCharacters && state.filteredCharacters.length>0 ? (
         <Card characters={state.filteredCharacters} />
       )
-      : state.filteredCharacters && state.filteredCharacters.length==0 && state.searchValue.length>0 && state.appliedFilters.length>0 ?(
-        'No matches :('
+      : (state.filteredCharacters && state.filteredCharacters.length==0)  && (state.appliedFilters[0].length>0 || state.appliedFilters[1].length>0 || state.appliedFilters[2].length>0) ?(
+        // 'No matches :('
+        <h4>No matches found. Click on Reset button to try again</h4>
       )
       : state.characters && state.characters.length>0?(
         <Card characters={state.characters} />
       ) 
       :(
-        'Loading matched characters...'
+        <h4>Loading matched characters...</h4>
       )}
     </CharacterStyle>
   );

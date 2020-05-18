@@ -42,4 +42,9 @@ export const SearchBarStyle = styled.div`
       background-color: #c53141;
     }
   }
+
+  @media (min-width: 1025px) {
+    margin-top: 0;
+    width: 500px;
+  }
 `;

@@ -4,7 +4,7 @@ import Reducer from './../reducer';
 const initialStore = {
   characters: [],
   searchValue: '',
-  appliedFilters:[],
+  appliedFilters:[[],[],[]],
   filteredCharacters:[],
   searchResultCharacters:[]
 };

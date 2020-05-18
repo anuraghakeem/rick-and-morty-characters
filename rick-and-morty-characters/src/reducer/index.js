@@ -3,45 +3,73 @@ const Reducer = (state, action) => {
     case 'SET_CHARACTERS':
       let newState_SET_CHARACTERS={...state}
       newState_SET_CHARACTERS.characters=[...action.payload.results];
+      console.log("newState_SET_CHARACTERS",newState_SET_CHARACTERS)
       return newState_SET_CHARACTERS;
     case 'SET_FILTER_BY_VALUE_GENDER':
-      let newState = {...state};
+      const filterCategory = action.payload.categoryNumber;
+      console.log("filterCategory number: ",filterCategory)
+      let newState_SET_FILTER_BY_VALUE_GENDER = {...state};
       let value = action.payload.value;
       let name = action.payload.name;
       let filteredValues=[];
-
-      state.characters.forEach(character=>{
-        if(character.gender.includes(value))
-          filteredValues.push(character)
-        else if(character.location.name.includes(value))
-          filteredValues.push(character)
-        else if(action.payload.episodeurl && character.episode.includes(value)){
-          filteredValues.push(character)
-        }
-      })
+      // let characterChek;
+      let exclusivecharacterChek = state.filteredCharacters.length>0?state.filteredCharacters:state.characters;
+      // console.log("characterCheck after filter",characterChek)
+      // characterChek.forEach(character=>{
+      //   if(character.gender.includes(value))
+      //     filteredValues.push(character)
+      //   else if(character.location.name.includes(value))
+      //     filteredValues.push(character)
+      //   else if(action.payload.episodeurl && character.episode.includes(value)){
+      //     filteredValues.push(character)
+      //   }
+      // })
+      // console.log("filteredValues afer filtercheck",filteredValues)
       let appliedFilters = state.appliedFilters;
       //if the value from the check box is not empty
       if (value) {
           //check if the filter already exists in the tracking array
-          let index = appliedFilters.indexOf(value);
+          let index = appliedFilters[filterCategory].indexOf(value);
           if (index==-1)
               //if it doesn’t, add it.
-              appliedFilters.push(value);
-          //change the characters to reflect the change
-          newState.filteredCharacters = [...filteredValues,...newState.filteredCharacters];
-          newState.filteredCharacters= [...new Set(newState.filteredCharacters)]
+              appliedFilters[filterCategory].push(value);
+          let inclusiveCharacterChek;
+          if(appliedFilters[filterCategory].length==1)
+            inclusiveCharacterChek = exclusivecharacterChek;
+          else
+            inclusiveCharacterChek = state.characters;
+          console.log("inclusive characterCheck after filter", inclusiveCharacterChek)
+          inclusiveCharacterChek.forEach(character=>{
+            // if(character.gender.includes(value))
+            if(appliedFilters[filterCategory].includes(character.gender))
+              filteredValues.push(character)
+            // else if(character.location.name.includes(value))
+            else if(appliedFilters[filterCategory].includes(character.location.name))
+              filteredValues.push(character)
+            // else if(action.payload.episodeurl && character.episode.includes(value)){
+            // else if(action.payload.episodeurl && appliedFilters[filterCategory].includes(character.episode)){
+            else if(action.payload.episodeurl && appliedFilters[filterCategory].some(categoryName=>character.episode.includes(categoryName))){
+              filteredValues.push(character)
+            }
+          })
+          console.log("filteredValues afer filtercheck",filteredValues)
+            //change the characters to reflect the change
+          newState_SET_FILTER_BY_VALUE_GENDER.filteredCharacters = filteredValues.filter(x => exclusivecharacterChek.includes(x))
+          // newState.filteredCharacters = [...filteredValues,...newState.filteredCharacters];
+          // newState.filteredCharacters= [...new Set(newState.filteredCharacters)]
         } else {
             //if the value is empty, we can assume everything has been erased 
-            let index = appliedFilters.indexOf(value);
+            let index = appliedFilters[filterCategory].indexOf(value);
             //in that case, remove the current filter
-            appliedFilters.splice(index, 1);
-            newState.filteredCharacters= newState.filteredCharacters.filter(character=>character.gender!=name) 
+            appliedFilters[filterCategory].splice(index, 1);
+            newState_SET_FILTER_BY_VALUE_GENDER.filteredCharacters= filterCategory==1?newState_SET_FILTER_BY_VALUE_GENDER.filteredCharacters.filter(character=>character.gender!=name) : filterCategory== 0? newState_SET_FILTER_BY_VALUE_GENDER.filteredCharacters.filter(character=>character.location.name!=name): newState_SET_FILTER_BY_VALUE_GENDER.filteredCharacters.filter(character=>character.url!=action.payload.episodeurl)
             if (appliedFilters.length == 0) {
                 //if there are no filters applied, reset the products to normal.
-                newState.filteredCharacters = [];
+                newState_SET_FILTER_BY_VALUE_GENDER.filteredCharacters = [];
             }
           }
-      return newState;
+      console.log("New state after adding filter: ",newState_SET_FILTER_BY_VALUE_GENDER)
+      return newState_SET_FILTER_BY_VALUE_GENDER;
     case 'SET_SEARCH_VALUE':
       let newState_SET_SEARCH_VALUE={...state}
       newState_SET_SEARCH_VALUE.searchValue=action.payload.searchValue
