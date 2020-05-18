@@ -15,21 +15,9 @@ function SearchBar() {
         payload: {res:res,searchValue:searchValue},
       }),
     );
-    // dispatch({
-    //   type: 'SET_SEARCH_VALUE',
-    //   payload: searchValue,
-    // });
   };
 
   const resetSearchValue = () => {
-    // getCharacters().then((res) =>
-    //   dispatch({
-    //     type: 'REMOVE_SEARCH_VALUE',
-    //     payload: res,
-    //   }),
-    // );
-    // // dispatch({ type: 'REMOVE_SEARCH_VALUE' });
-    // setSearchValue('');
     window.location.reload();
   };
 

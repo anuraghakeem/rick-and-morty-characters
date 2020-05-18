@@ -26,9 +26,6 @@ function Character() {
       : state.filteredCharacters && state.filteredCharacters.length==0 && state.searchValue.length>0 && state.appliedFilters.length>0 ?(
         'No matches :('
       )
-      // : state.searchResultCharacters && state.searchResultCharacters.length>0?(
-      //   <Card characters={state.searchResultCharacters} />
-      // ) 
       : state.characters && state.characters.length>0?(
         <Card characters={state.characters} />
       ) 
